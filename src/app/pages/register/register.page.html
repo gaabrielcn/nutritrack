@@ -1,0 +1,45 @@
+<ion-content class="register-container">
+  <div class="content-wrapper">
+
+    <!-- Topo com botão de voltar e nome -->
+    <div class="top-bar">
+      <ion-button fill="clear" size="small" class="back-btn" routerLink="/login">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <span class="app-name">Nutritrack</span>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+      <ion-item lines="inset" class="input-item">
+        <ion-label position="floating">Primeiro nome</ion-label>
+        <ion-input type="text" formControlName="firstName"></ion-input>
+      </ion-item>
+
+      <ion-item lines="inset" class="input-item">
+        <ion-label position="floating">Sobrenome</ion-label>
+        <ion-input type="text" formControlName="lastName"></ion-input>
+      </ion-item>
+
+      <ion-item lines="inset" class="input-item">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item lines="inset" class="input-item">
+        <ion-label position="floating">Telefone</ion-label>
+        <ion-input type="tel" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item lines="inset" class="input-item">
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" class="save-btn" [disabled]="!registerForm.valid">
+        SAVE
+      </ion-button>
+
+    </form>
+  </div>
+</ion-content>

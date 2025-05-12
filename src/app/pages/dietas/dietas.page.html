@@ -1,0 +1,26 @@
+<ion-content class="pagina-dietas">
+  <div class="barra-superior">
+    <ion-button fill="clear" aria-label="Voltar" class="botao-voltar">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+    <div class="titulo">Minhas Dietas</div>
+  </div>
+
+  <div class="conteudo-centralizado">
+    <div class="lista-dietas">
+      <div class="card-dieta" *ngFor="let dieta of dietas">
+        <div class="informacoes-dieta">
+          <div class="nome-dieta">{{ dieta.nome }}</div>
+          <div class="kcal-dieta">{{ dieta.kcalTotal }} kcal</div>
+        </div>
+        <ion-button fill="clear" class="botao-ver">
+          <ion-icon name="eye"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <ion-button expand="full" (click)="cadastrarDieta()" class="botao-dieta">
+      Cadastrar Nova Dieta
+    </ion-button>
+  </div>
+</ion-content>

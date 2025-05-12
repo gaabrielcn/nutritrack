@@ -1,0 +1,64 @@
+.register-container {
+    --background: linear-gradient(to bottom, #f3fff1, #d2edcf);
+  
+    .content-wrapper {
+      padding: 24px;
+      max-width: 360px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+  
+    .top-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+  
+      .back-btn {
+        margin-right: 8px;
+        color: #397342;
+  
+        ion-icon {
+          font-size: 20px;
+        }
+      }
+  
+      .app-name {
+        font-size: 20px;
+        font-weight: bold;
+        color: #397342;
+      }
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  
+    .input-item {
+      --background: transparent;
+      --highlight-color-focused: #397342;
+      --border-color: #c0d3be;
+  
+      ion-label {
+        color: #397342;
+      }
+  
+      ion-input {
+        color: #397342;
+      }
+    }
+  
+  
+    .save-btn {
+      --background: #397342;
+      --color: white;
+      --border-radius: 25px;
+      --box-shadow: none;
+      text-transform: none;
+    }
+  
+  }
+  

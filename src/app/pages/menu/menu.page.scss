@@ -1,0 +1,31 @@
+.menu-content {
+    --background: #cfe2cf; // verde claro do fundo da tela
+  }
+  
+  ion-toolbar {
+    --background: #6f9e71; // verde escuro do cabeçalho
+  }
+  
+  ion-title.titulo {
+    font-weight: bold;
+    font-family: 'Georgia', serif;
+    color: white;
+    text-align: center;
+  }
+  
+  ion-item {
+    --background: #6f9e71;
+    --color: white;
+    border-radius: 4px;
+    margin: 4px 8px;
+  }
+  
+  ion-icon {
+    color: white;
+  }
+  
+  ion-fab-button {
+    --background: #e53935;
+    --color: white;
+  }
+  

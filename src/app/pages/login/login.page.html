@@ -1,0 +1,60 @@
+<ion-content class="login-container">
+  <div class="content-wrapper">
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="Nutritrack logo" />
+    </div>
+
+    <h2 class="title">Entrar</h2>
+
+    <form [formGroup]="credentials" (ngSubmit)="login()">
+
+      <ion-item lines="none" class="input-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input
+          placeholder="Digite seu email"
+          type="email"
+          formControlName="email">
+        </ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="email?.touched && email?.invalid">
+        Email inválido
+      </ion-note>
+
+      <ion-item lines="none" class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input
+          placeholder="Digite sua senha"
+          type="password"
+          formControlName="password">
+        </ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="password?.touched && password?.invalid">
+        A senha deve ter pelo menos 6 caracteres
+      </ion-note>
+
+      <div class="forgot">
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+
+      <ion-button
+        expand="block"
+        class="main-btn"
+        type="submit"
+        [disabled]="!credentials.valid">
+        Acessar
+      </ion-button>
+    </form>
+
+    <div class="ou">OU</div>
+
+    <ion-button expand="block" class="google-btn">
+      <ion-icon name="logo-google" slot="start"></ion-icon>
+      Entrar com Google
+    </ion-button>
+
+    <div class="register">
+      Ainda não possui uma conta?
+      <a routerLink="/register">Cadastre-se</a>
+    </div>
+  </div>
+</ion-content>

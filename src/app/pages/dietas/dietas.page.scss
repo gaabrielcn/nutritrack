@@ -1,0 +1,80 @@
+.pagina-dietas {
+    --background: linear-gradient(to bottom, #f3fff1, #e1f3e1);
+    padding: 16px;
+  
+    .conteudo-centralizado {
+      width: 85%;
+      margin: 0 auto;
+    }
+  }
+  
+  .barra-superior {
+    background-color: #7a9a7a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .botao-voltar {
+    color: white;
+    font-size: 24px;
+  }
+  
+  .titulo {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .lista-dietas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  
+  .card-dieta {
+    background-color: #7a9a7a;
+    border-radius: 15px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  
+  .informacoes-dieta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  
+    .nome-dieta {
+      font-weight: bold;
+      font-size: 16px;
+    }
+  
+    .kcal-dieta {
+      font-size: 14px;
+      color: #e1f3e1;
+    }
+  }
+  
+  .botao-ver {
+    color: white;
+    font-size: 20px;
+  }
+  
+  .botao-dieta {
+    margin: 30px auto;
+    --background: #397342;
+    --background-activated: #2f5f37;
+    --background-hover: #2f5f37;
+    width: 85%;
+    font-weight: bold;
+    color: #f3fff1;
+    border-radius: 12px;
+  }
+  
