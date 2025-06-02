@@ -38,7 +38,17 @@ export class AuthService {
     }
   }
 
-  logout(): Promise<void> {
-    return signOut(this.auth);
+  async logout(): Promise<void> {
+  try {
+    await signOut(this.auth);
+  } catch (error) {
+    console.error('Erro ao deslogar:', error);
+    throw error;
   }
+}
+get currentUser() {
+  return this.auth.currentUser;
+}
+
+
 }

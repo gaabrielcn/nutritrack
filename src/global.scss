@@ -1,37 +1,120 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
+/* src/global.scss */
 
-/* Core CSS required for Ionic components to work properly */
+/* ================================
+   1) Imports básicos do Ionic
+   ================================ */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* ================================
+   2) Variáveis de apoio
+   ================================ */
+:root {
+  --app-menu-bg: #7a9a7a;
+  --app-menu-text: #ffffff;
+}
+
+/* ================================
+   3) Caixa externa do menu
+   ================================ */
+ion-menu {
+  --background: var(--app-menu-bg) !important;
+  --backdrop-opacity: 0 !important;
+}
+
+/* ================================
+   4) Wrapper e conteúdo interno
+   ================================ */
+/* Shadow Parts */
+ion-menu::part(menu-wrapper),
+ion-menu::part(menu-content),
+ion-menu::part(menu-inner) {
+  background: var(--app-menu-bg) !important;
+}
+/* Seletores MD/iOS fallback */
+ion-menu .menu-inner,
+ion-menu.md .menu-inner,
+ion-menu.ios .menu-inner {
+  background: var(--app-menu-bg) !important;
+}
+
+/* ================================
+   5) Ion-Content interno do menu
+   ================================ */
+ion-menu > ion-content,
+ion-menu .menu-inner > ion-content,
+ion-menu.md > ion-content,
+ion-menu.ios > ion-content {
+  background: var(--app-menu-bg) !important;
+  --background: var(--app-menu-bg) !important;
+}
+
+/* ================================
+   6) Toolbar (header) do menu
+   ================================ */
+/* Shadow Part + seletor direto */
+ion-menu::part(menu-toolbar),
+ion-menu ion-header ion-toolbar {
+  --background: var(--app-menu-bg) !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+/* ================================
+   7) Itens da lista
+   ================================ */
+ion-menu ion-item {
+  --background: var(--app-menu-bg) !important;
+  --border-width: 0 !important;
+  --border-style: none !important;
+}
+/* Native part para garantir modo MD */
+ion-menu ion-item::part(native) {
+  background: var(--app-menu-bg) !important;
+}
+
+/* ================================
+   8) Texto e ícones
+   ================================ */
+ion-menu ion-title,
+ion-menu ion-label,
+ion-menu ion-icon {
+  color: var(--app-menu-text) !important;
+}
+
+/* ================================
+   9) Remoção de bordas e sombras restantes
+   ================================ */
+/* Lista do menu */
+ion-menu ion-list {
+  border: none !important;
+  box-shadow: none !important;
+}
+/* Wrapper MD */
+ion-menu.md .menu-inner {
+  border: none !important;
+  box-shadow: none !important;
+}
+/* Backdrop/content slot */
+ion-menu > ion-content {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ================================
+   10) Hover / Activated / Selected
+   ================================ */
+ion-menu ion-item:hover,
+ion-menu ion-item.activated,
+ion-menu ion-item.selected {
+  background: rgba(255,255,255,0.1) !important;
+}
