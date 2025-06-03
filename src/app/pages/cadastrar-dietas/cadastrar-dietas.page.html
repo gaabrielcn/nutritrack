@@ -1,0 +1,120 @@
+<!-- src/app/pages/cadastrar-dietas/cadastrar-dietas.page.html -->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dietas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nutritrack - Cadastrar Dieta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="pagina-cadastro-dieta">
+  <!-- Nome da Dieta, Calorias Estimadas e Total de Kcal -->
+  <div class="campo-dieta">
+    <ion-item>
+      <ion-label position="floating">Nome da Dieta</ion-label>
+      <ion-input [(ngModel)]="nomeDieta" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Calorias Estimadas</ion-label>
+      <ion-input [(ngModel)]="estimativaCal" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Total de Kcal (real)</ion-label>
+      <ion-input [value]="totalKcalDieta" readonly></ion-input>
+    </ion-item>
+  </div>
+
+  <!-- Refeições conforme antes -->
+  <ng-container *ngFor="let refeicao of refeicoes; let i = index">
+    <ion-card class="card-refeicao">
+      <ion-button
+        fill="clear"
+        class="botao-remover-card"
+        (click)="removerRefeicao(i)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+
+      <ion-item class="cabecalho-card">
+        <ion-label position="stacked">Tipo de Refeição</ion-label>
+        <ion-select [(ngModel)]="refeicao.tipo" placeholder="Escolha">
+          <ion-select-option value="Café da Manhã">Café da Manhã</ion-select-option>
+          <ion-select-option value="Almoço">Almoço</ion-select-option>
+          <ion-select-option value="Lanche">Lanche</ion-select-option>
+          <ion-select-option value="Jantar">Jantar</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="total-kcal-refeicao">
+        {{ refeicao.totalCal }} Kcal
+      </div>
+
+      <div class="conteudo-card">
+        <ion-item class="campo-busca">
+          <ion-searchbar
+            placeholder="Busque um alimento..."
+            [(ngModel)]="refeicao.busca"
+            (ionInput)="buscarSugestoes($event, i)"
+            showCancelButton="focus">
+          </ion-searchbar>
+        </ion-item>
+
+        <ion-list *ngIf="refeicao.sugestoes.length > 0" class="lista-sugestoes">
+          <ion-item
+            *ngFor="let s of refeicao.sugestoes"
+            (click)="selecionarSugestao(s, i)">
+            {{ s.nome }}
+          </ion-item>
+        </ion-list>
+
+        <ion-item
+          class="campo-quantidade"
+          *ngIf="refeicao.selecionado">
+          <ion-label position="floating">Quantidade (gramas)</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="refeicao.qtd">
+          </ion-input>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          class="botao-adicionar-alimento"
+          (click)="adicionarAlimento(i)"
+          [disabled]="!refeicao.selecionado || refeicao.qtd <= 0">
+          Adicionar Alimento
+        </ion-button>
+      </div>
+
+      <ion-list *ngIf="refeicao.itens.length > 0" class="lista-itens">
+        <ion-item *ngFor="let item of refeicao.itens; let j = index">
+          <ion-label class="info-item">
+            {{ item.nome }} — {{ item.calorias }} Kcal
+          </ion-label>
+          <ion-button
+            fill="clear"
+            slot="end"
+            (click)="removerItem(i, j)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </ng-container>
+
+  <!-- FABs para adicionar refeição e salvar dieta -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="secondary" (click)="adicionarRefeicao()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" (click)="salvarDieta()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

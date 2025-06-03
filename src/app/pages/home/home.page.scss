@@ -1,7 +1,7 @@
 /* src/app/pages/home/home.page.scss */
 
 .pagina-home {
-  /* fundo em gradiente conforme você definiu */
+  /* Fundo degradê */
   --background: linear-gradient(to bottom, #f3fff1, #e1f3e1);
   padding: 16px;
 
@@ -14,19 +14,32 @@
     margin: 20px auto;
     width: 85%;
 
-    select {
+    .label-selecao {
+      font-size: 14px;
+      font-weight: bold;
+      color: #2f5f37;   /* Verde escuro para contraste */
+      margin-bottom: 8px;
+    }
+
+    ion-select {
       width: 100%;
-      padding: 10px;
       border-radius: 8px;
-      border: none;
-      background-color: #7a9a7a;
-      color: white;
+      background-color: #7a9a7a;  /* Verde escuro */
+      color: #ffffff;             /* Texto branco */
       font-weight: bold;
 
-      option {
-        background-color: white;
-        color: #333;
+      .select-text {
+        color: #ffffff;
+        font-weight: bold;
       }
+      .select-icon {
+        color: #ffffff;
+      }
+    }
+
+    ion-select-option {
+      background-color: #ffffff;  /* Fundo branco */
+      color: #333333;             /* Texto escuro */
     }
   }
 
@@ -64,10 +77,6 @@
       height: 100%;
     }
 
-    circle:first-child {
-      fill: transparent;
-    }
-
     .texto-donut {
       position: absolute;
       top: 50%;
@@ -85,47 +94,6 @@
       .total-kcal {
         font-size: 14px;
         display: block;
-      }
-    }
-  }
-
-  .card-macro {
-    background-color: #7a9a7a;
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px auto;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    width: 100%;
-
-    .grafico-macro,
-    .svg-macro {
-      width: 64px;
-      height: 64px;
-    }
-
-    circle:first-child {
-      fill: transparent;
-    }
-
-    .legenda {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-
-      .item-legenda {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 12px;
-        color: white;
-
-        .cor-caixa {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-        }
       }
     }
   }
@@ -181,5 +149,4 @@
     color: #f3fff1;
     border-radius: 12px;
   }
-  
 }

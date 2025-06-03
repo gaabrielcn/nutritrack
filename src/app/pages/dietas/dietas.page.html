@@ -1,25 +1,44 @@
+<!-- src/app/pages/dietas/dietas.page.html -->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Nutritrack</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="pagina-dietas">
   <div class="barra-superior">
-    <ion-button fill="clear" aria-label="Voltar" class="botao-voltar">
+    <ion-button fill="clear" class="botao-voltar" (click)="voltar()">
       <ion-icon name="arrow-back"></ion-icon>
     </ion-button>
     <div class="titulo">Minhas Dietas</div>
   </div>
 
   <div class="conteudo-centralizado">
-    <div class="lista-dietas">
+    <!-- Se houver dietas, exibe-as em cards -->
+    <div class="lista-dietas" *ngIf="dietas.length > 0; else semDietas">
       <div class="card-dieta" *ngFor="let dieta of dietas">
         <div class="informacoes-dieta">
-          <div class="nome-dieta">{{ dieta.nome }}</div>
-          <div class="kcal-dieta">{{ dieta.kcalTotal }} kcal</div>
+          <div class="nome-dieta">{{ dieta.nomeDieta }}</div>
+          <div class="kcal-dieta">{{ dieta.totalKcal }} kcal</div>
         </div>
-        <ion-button fill="clear" class="botao-ver">
+        <ion-button fill="clear" class="botao-ver" (click)="verDieta(dieta.id!)">
           <ion-icon name="eye"></ion-icon>
         </ion-button>
       </div>
     </div>
 
-    <ion-button expand="full" (click)="cadastrarDieta()" class="botao-dieta">
+    <!-- Caso não existam dietas, mostra mensagem -->
+    <ng-template #semDietas>
+      <p style="text-align:center; margin-top: 24px; color: #7a9a7a;">
+        Você ainda não cadastrou nenhuma dieta.
+      </p>
+    </ng-template>
+
+    <ion-button expand="full" class="botao-dieta" (click)="cadastrarDieta()">
       Cadastrar Nova Dieta
     </ion-button>
   </div>

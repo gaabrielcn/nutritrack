@@ -1,3 +1,5 @@
+// src/app/app-routing.module.ts
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -26,6 +28,13 @@ const routes: Routes = [
     path: 'dietas',
     loadChildren: () =>
       import('./pages/dietas/dietas.module').then(m => m.DietasPageModule)
+  },
+  {
+    path: 'cadastrar-dietas',
+    loadChildren: () =>
+      import('./pages/cadastrar-dietas/cadastrar-dietas.module').then(
+        m => m.CadastrarDietasPageModule
+      )
   },
   {
     path: '**',

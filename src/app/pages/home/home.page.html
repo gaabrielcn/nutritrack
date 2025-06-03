@@ -1,3 +1,5 @@
+<!-- src/app/pages/home/home.page.html -->
+
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -7,75 +9,80 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="pagina-home">
   <div class="selecao-dieta">
-    <select aria-label="Selecionar Dieta">
-      <option value="dieta01" selected>Dieta 01</option>
-      <option value="dieta02">Dieta 02</option>
-      <option value="dieta03">Dieta 03</option>
-      <option value="dieta04">Dieta 04</option>
-    </select>
+    <div class="label-selecao">Selecione a dieta:</div>
+    <ion-select
+      aria-label="Selecionar Dieta"
+      (ionChange)="selecionarDieta($any($event).detail.value)"
+      [ngModel]="selectedDieta"
+    >
+      <ion-select-option *ngFor="let dieta of dietas" [value]="dieta">
+        {{ dieta.nomeDieta }}
+      </ion-select-option>
+    </ion-select>
   </div>
 
-  <div class="conteudo-centralizado">
+  <div class="conteudo-centralizado" *ngIf="selectedDieta">
     <div class="card-principal">
       <div class="texto-card">
-        <div>1116 Kcal</div>
+        <div>{{ caloriasIngeridas }} Kcal</div>
         <div class="sublinhado">Ingeridas</div>
       </div>
 
       <div class="grafico-donut">
         <svg class="svg-donut" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" stroke="#2f8f4a" stroke-width="12"></circle>
-          <circle cx="50" cy="50" r="44" stroke="#2ecc71" stroke-dasharray="276.46" stroke-dashoffset="121.44" stroke-linecap="round" stroke-width="12" transform="rotate(-90 50 50)"></circle>
-          <path d="M50 6a44 44 0 0 1 26.4 9.3" stroke="#f5b301" stroke-linecap="round" stroke-width="12"></path>
+          <!-- Círculo de fundo, full branco -->
+          <circle
+            cx="50"
+            cy="50"
+            r="44"
+            stroke="#ffffff"
+            stroke-width="12"
+            fill="none"
+          ></circle>
+          <!-- Segmento consumido, cor dinâmica, dasharray controla apenas a parte preenchida -->
+          <circle
+            cx="50"
+            cy="50"
+            r="44"
+            [attr.stroke]="strokeColor"
+            stroke-width="12"
+            fill="none"
+            [attr.stroke-dasharray]="dashArray"
+            stroke-linecap="round"
+            transform="rotate(-90 50 50)"
+          ></circle>
         </svg>
         <div class="texto-donut">
-          <span class="porcentagem">56%</span>
-          <span class="total-kcal">2100 Kcal</span>
+          <span class="porcentagem">{{ porcentagemCal }}%</span>
+          <span class="total-kcal">{{ caloriasEstimadas }} Kcal</span>
         </div>
       </div>
 
       <div class="texto-card">
-        <div>984 Kcal</div>
+        <div>{{ caloriasRestantes }} Kcal</div>
         <div class="sublinhado">Restantes</div>
       </div>
     </div>
 
-    <div class="card-macro">
-      <div class="grafico-macro">
-        <svg class="svg-macro" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" stroke="#2f8f4a" stroke-width="12"></circle>
-          <circle cx="50" cy="50" r="44" stroke="#d9f2c7" stroke-dasharray="69.12 207.34" stroke-width="12" transform="rotate(-90 50 50)"></circle>
-          <circle cx="50" cy="50" r="44" stroke="#f5b301" stroke-dasharray="55 276.46" stroke-dashoffset="69.12" stroke-width="12" transform="rotate(-90 50 50)"></circle>
-          <circle cx="50" cy="50" r="44" stroke="#d32f2f" stroke-dasharray="152.34 276.46" stroke-dashoffset="124.12" stroke-width="12" transform="rotate(-90 50 50)"></circle>
-        </svg>
-      </div>
-
-      <div class="legenda">
-        <div class="item-legenda"><div class="cor-caixa" style="background-color:#f5b301"></div>Gordura</div>
-        <div class="item-legenda"><div class="cor-caixa" style="background-color:#d32f2f"></div>Proteína</div>
-        <div class="item-legenda"><div class="cor-caixa" style="background-color:#d9f2c7"></div>Carboidratos</div>
-      </div>
-    </div>
-
     <div class="card-refeicoes">
-      <div class="titulo-refeicoes">Dieta 01</div>
+      <div class="titulo-refeicoes">{{ selectedDieta.nomeDieta }}</div>
       <ion-list>
-        <ion-item *ngFor="let refeicao of refeicoesConsumidas">
-          <ion-avatar slot="start">
-            <img [src]="refeicao.img" alt="Imagem da refeição" />
-          </ion-avatar>
+        <ion-item *ngFor="let refeicao of selectedDieta.refeicoes">
           <ion-label>
-            <h2>{{ refeicao.nome }}</h2>
-            <p>{{ refeicao.calorias }} kcal</p>
+            <h2>{{ refeicao.tipo }}</h2>
+            <p>{{ refeicao.totalCal }} Kcal</p>
           </ion-label>
         </ion-item>
       </ion-list>
     </div>
 
-    <ion-button expand="full" (click)="cadastrarDieta()" class="botao-dieta">
+    <ion-button
+      expand="full"
+      (click)="cadastrarDieta()"
+      class="botao-dieta"
+    >
       Cadastrar Nova Dieta
     </ion-button>
   </div>

@@ -1,21 +1,21 @@
-// src/app/pages/dietas/dietas.module.ts
+// src/app/pages/cadastrar-dietas/cadastrar-dietas.module.ts
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { DietasPageRoutingModule } from './dietas-routing.module';
-import { DietasPage } from './dietas.page';
+import { CadastrarDietasPageRoutingModule } from './cadastrar-dietas-routing.module';
+import { CadastrarDietasPage } from './cadastrar-dietas.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DietasPageRoutingModule
+    CadastrarDietasPageRoutingModule
     // Não adicione AngularFireModule nem AngularFirestoreModule aqui
   ],
-  declarations: [DietasPage]
+  declarations: [CadastrarDietasPage]
 })
-export class DietasPageModule {}
+export class CadastrarDietasPageModule {}

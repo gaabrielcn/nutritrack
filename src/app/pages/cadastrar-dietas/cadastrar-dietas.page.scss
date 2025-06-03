@@ -1,0 +1,287 @@
+/* ==================================================
+   0) Reset geral de backgrounds dentro do card-refeicao
+   --------------------------------------------------
+   — Impede que componentes internos fiquem com fundo preto
+   ================================================== */
+.card-refeicao ion-item,
+.card-refeicao ion-list,
+.card-refeicao ion-searchbar,
+.card-refeicao ion-select,
+.card-refeicao ion-input {
+  --background: transparent !important;
+  background: transparent !important;
+}
+
+/* ==================================================
+   1) Fundo da página (degradê do bege claro)
+   ================================================== */
+.pagina-cadastro-dieta {
+  --background: linear-gradient(to bottom, #f3fff1, #e1f3e1);
+  padding: 16px;
+}
+
+/* ==================================================
+   2) Título “Cadastrar Dietas”
+   ================================================== */
+.titulo-cadastro {
+  color: #2f5f37;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 16px 0 24px 0;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.titulo-cadastro::before,
+.titulo-cadastro::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 20%;
+  height: 1px;
+  background: #7a9a7a;
+}
+.titulo-cadastro::before {
+  left: 5%;
+}
+.titulo-cadastro::after {
+  right: 5%;
+}
+
+/* ==================================================
+   3) Campos “Nome da Dieta” e “Total de Kcal”
+   - Container ocupa 70% da largura da tela
+   ================================================== */
+.campo-dieta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 auto 32px auto;
+  width: 70%; /* ← ALTERE AQUI para mudar a largura dos campos */
+}
+
+.campo-dieta ion-item {
+  background-color: #ffffff;
+  border-radius: 8px; /* ← ALTERE AQUI para mudar o border-radius */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --background: #ffffff;
+}
+
+.campo-dieta ion-label {
+  color: #7a9a7a;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.campo-dieta ion-input {
+  color: #2f5f37;
+  font-size: 16px;
+}
+
+/* Validação de form-control inválido */
+ion-input.ng-invalid.ng-touched {
+  border: 1px solid #e74c3c;
+}
+
+/* ==================================================
+   4) Lista de cartões de refeição
+   ================================================== */
+.lista-refeicoes {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 120px; /* espaço para FABs */
+}
+
+/* ==================================================
+   5) Cada card de refeição
+   - Ocupa 85% da largura, centralizado
+   ================================================== */
+.card-refeicao {
+  background-color: #7a9a7a;
+  border-radius: 15px;       /* ← ALTERE AQUI para mudar o border-radius do card */
+  padding: 24px 16px 16px 16px;
+  position: relative;
+  width: 85%;                /* ← ALTERE AQUI para mudar a largura do card */
+  margin: 0 auto;
+}
+
+/* ==================================================
+   6) Valor de calorias (canto superior esquerdo)
+   ================================================== */
+.total-kcal-refeicao {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: #f3fff1;   /* cor do texto das calorias */
+  font-size: 16px;  /* ← ALTERE AQUI para mudar o tamanho da fonte */
+  font-weight: bold;
+}
+
+/* ==================================================
+   7) Botão de remover card (lixeira, canto superior direito)
+   ================================================== */
+.botao-remover-card {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #e74c3c; /* ← ALTERE AQUI para mudar a cor do ícone de lixeira */
+  font-size: 24px; /* ← ALTERE AQUI para mudar o tamanho do ícone */
+  background: transparent !important;
+  z-index: 2;
+}
+
+/* ==================================================
+   8) Cabeçalho do card: “Tipo de Refeição”
+   ================================================== */
+.cabecalho-card {
+  margin-top: 24px;   /* espaço abaixo do texto de calorias */
+  margin-bottom: 16px;
+}
+
+.cabecalho-card ion-item {
+  width: 100%;                         /* ← ALTERE AQUI para mudar a largura do select */
+  background-color: #f3fff1 !important; /* ← ALTERE AQUI para mudar o fundo do select */
+  border-radius: 8px;                  /* ← ALTERE AQUI para mudar o border-radius do select */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  margin: 0;
+}
+
+.cabecalho-card ion-select {
+  --background: transparent;
+  font-size: 14px;                    /* ← ALTERE AQUI para mudar o tamanho da fonte do select */
+  color: #f3fff1;                     /* ← ALTERE AQUI para mudar a cor do texto do select */
+  --placeholder-color: #f3fff1;        /* ← ALTERE AQUI para mudar a cor do placeholder */
+  --min-height: 30px;                 /* ← ALTERE AQUI para mudar a altura mínima do select */
+  line-height: 30px;
+}
+
+/* ==================================================
+   9) Conteúdo interno do card: busca e quantidade
+   ================================================== */
+.conteudo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ----- 9.1) Campo de Busca (ion-searchbar) ----- */
+.conteudo-card .campo-busca {
+  width: 100%;       /* ← ALTERE AQUI para mudar a largura do campo de busca */
+}
+
+.conteudo-card .campo-busca ion-item {
+  background-color: #f3fff1 !important; /* ← ALTERE AQUI para mudar o fundo do container da busca */
+  border-radius: 8px;                   /* ← ALTERE AQUI para mudar o border-radius do container da busca */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  overflow: hidden;                     /* necessário para que o searchbar respeite os cantos arredondados */
+}
+
+.conteudo-card .campo-busca ion-searchbar {
+  --background: transparent !important; /* o container (ion-item) fornece o fundo */
+  --cancel-button-color: #f3fff1;        /* ← ALTERE AQUI para mudar a cor do “X” */
+  color: #f3fff1;                       /* ← ALTERE AQUI para mudar a cor do texto digitado */
+  --icon-color: #f3fff1;                /* ← ALTERE AQUI para mudar a cor do ícone de lupa */
+  --border-radius: 8px;                 /* ← ALTERE AQUI para arredondar a caixa interna do searchbar */
+  --min-height: 40px;                   /* ← ALTERE AQUI para mudar a altura mínima do searchbar */
+}
+
+/* ----- 9.2) Lista de Sugestões (aparece abaixo do searchbar) ----- */
+.lista-sugestoes {
+  max-height: 120px;
+  background: #f3fff1 !important; /* ← ALTERE AQUI para mudar o fundo da lista de sugestões */
+  border-radius: 8px;             /* ← ALTERE AQUI para mudar o border-radius */
+  margin: -8px 0 8px 0;           /* sobrepõe ligeiramente o searchbar */
+  overflow-y: auto;
+}
+
+.lista-sugestoes ion-item {
+  --background: transparent;
+  color: #2f5f37;                 /* ← ALTERE AQUI para mudar a cor do texto das sugestões */
+  font-size: 14px;
+}
+
+/* ----- 9.3) Campo de Quantidade (ion-input) ----- */
+.conteudo-card .campo-quantidade ion-item {
+  background-color: #f3fff1 !important; /* ← ALTERE AQUI para mudar o fundo do container da quantidade */
+  border-radius: 8px;                  /* ← ALTERE AQUI para mudar o border-radius do container da quantidade */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  width: 100%;                         /* ← ALTERE AQUI para mudar a largura do container */
+}
+
+.conteudo-card .campo-quantidade ion-label {
+  color: #7a9a7a;      /* ← ALTERE AQUI para mudar a cor do rótulo “Quantidade:” */
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.conteudo-card .campo-quantidade ion-input {
+  --background: #f3fff1 !important;   /* ← ALTERE AQUI para mudar o fundo do próprio input */
+  color: #2f5f37;                     /* ← ALTERE AQUI para mudar a cor do texto digitado */
+  font-size: 16px;
+  --min-height: 40px;                 /* ← ALTERE AQUI para mudar a altura mínima do input */
+}
+
+/* ==================================================
+   10) Botão “Adicionar Alimento” dentro do card
+   ================================================== */
+.botao-adicionar-alimento {
+  --background: #397342;       /* ← ALTERE AQUI para mudar o fundo normal do botão */
+  --background-hover: #2f5f37; /* ← ALTERE AQUI para mudar o hover/ativo do botão */
+  color: #f3fff1;             /* ← ALTERE AQUI para mudar a cor do texto do botão */
+  width: 100%;                /* ← ALTERE AQUI para mudar a largura do botão */
+  --min-height: 40px;         /* ← ALTERE AQUI para mudar a altura mínima do botão */
+  border-radius: 8px;         /* ← ALTERE AQUI para mudar o border-radius do botão */
+  font-weight: 600;
+}
+
+/* ==================================================
+   11) Lista de itens adicionados ao card 
+   ================================================== */
+.lista-itens {
+  margin-top: 8px;
+}
+
+.lista-itens ion-item {
+  --background: #f3fff1 !important;    /* ← ALTERE AQUI para mudar o fundo de cada item adicionado */
+  border-radius: 4px;                  /* ← ALTERE AQUI para mudar o border-radius de cada item adicionado */
+  --padding-start: 12px;
+  --padding-end: 8px;
+  --border-width: 0 0 1px 0;
+  --border-color: rgba(47, 95, 55, 0.2); /* ← ALTERE AQUI para mudar a cor da borda inferior */
+  margin-bottom: 4px;
+}
+
+.lista-itens .info-item {
+  color: #2f5f37; /* ← ALTERE AQUI para mudar a cor do texto dos itens adicionados */
+  font-size: 14px;
+}
+
+.lista-itens ion-button {
+  color: #e74c3c;  /* ← ALTERE AQUI para mudar a cor do ícone de remover item */
+  font-size: 20px; /* ← ALTERE AQUI para mudar o tamanho do ícone de remover item */
+  --background: transparent !important;
+}
+
+/* ==================================================
+   12) FABs (Adicionar Refeição / Salvar Dieta)
+   ================================================== */
+ion-fab[vertical="bottom"][horizontal="start"] {
+  left: 30% !important; /* ← ALTERE AQUI para mudar a distância do FAB “+” da margem esquerda */
+}
+
+ion-fab[vertical="bottom"][horizontal="end"] {
+  right: 30% !important; /* ← ALTERE AQUI para mudar a distância do FAB “Salvar” da margem direita */
+}
+
+ion-fab-button[color="secondary"] {
+  --background: #397342;       /* ← ALTERE AQUI para mudar a cor de fundo dos FABs */
+  --background-hover: #2f5f37; /* ← ALTERE AQUI para mudar o hover dos FABs */
+  color: #f3fff1;             /* ← ALTERE AQUI para mudar a cor do ícone dentro dos FABs */
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
