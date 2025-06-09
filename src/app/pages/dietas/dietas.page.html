@@ -25,19 +25,25 @@
           <div class="nome-dieta">{{ dieta.nomeDieta }}</div>
           <div class="kcal-dieta">{{ dieta.totalKcal }} kcal</div>
         </div>
-        <ion-button fill="clear" class="botao-ver" (click)="verDieta(dieta.id!)">
-          <ion-icon name="eye"></ion-icon>
+
+        <!-- Botão de editar (ícone de lápis) -->
+        <ion-button fill="clear" class="botao-editar" (click)="editarDieta(dieta.id!)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" class="botao-compartilhar" (click)="shareDieta(dieta)">
+          <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
         </ion-button>
       </div>
     </div>
 
     <!-- Caso não existam dietas, mostra mensagem -->
     <ng-template #semDietas>
-      <p style="text-align:center; margin-top: 24px; color: #7a9a7a;">
+      <p style="text-align:center; margin-top:24px; color:#7a9a7a;">
         Você ainda não cadastrou nenhuma dieta.
       </p>
     </ng-template>
 
+    <!-- Botão para cadastrar nova dieta -->
     <ion-button expand="full" class="botao-dieta" (click)="cadastrarDieta()">
       Cadastrar Nova Dieta
     </ion-button>

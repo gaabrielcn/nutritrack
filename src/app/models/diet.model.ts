@@ -17,6 +17,7 @@ export interface Diet {
   id?: string;
   nomeDieta: string;
   totalKcal: number;
+  estimativaCal: number;  
   dataCriacao: any;  // Timestamp do Firestore (SDK modular)
   userId: string;
   refeicoes: DietMeal[];

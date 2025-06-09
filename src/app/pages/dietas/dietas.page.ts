@@ -6,6 +6,8 @@ import { LoadingController, ToastController } from '@ionic/angular';
 
 import { Diet } from '../../models/diet.model';
 import { DietService } from '../../services/diet.service';
+import { Share } from '@capacitor/share';
+
 
 @Component({
   selector: 'app-dietas',
@@ -66,8 +68,30 @@ export class DietasPage implements OnInit {
     this.router.navigate(['/cadastrar-dietas']);
   }
 
-  verDieta(dietId: string) {
-    // Se mais tarde quiser detalhar ou editar, basta ajustar essa rota
-    this.router.navigate([`/dietas/${dietId}`]);
+  editarDieta(dietId: string) {
+  // aqui usamos queryParams para reutilizar /cadastrar-dietas
+  this.router.navigate(['/cadastrar-dietas'], {
+    queryParams: { id: dietId }
+  });
+}
+async shareDieta(dieta: Diet) {
+  try {
+    await Share.share({
+      title: `Minha dieta: ${dieta.nomeDieta}`,
+      text: `Estou planejando uma dieta de ${dieta.estimativaCal} kcal e já ingeri ${dieta.totalKcal} kcal hoje.`,
+      // opcional: montamos um pequeno resumo das refeições
+      dialogTitle: 'Compartilhar minha dieta',
+      url: ''  // se tiver uma URL pública ou deeplink do app
+    });
+  } catch (err) {
+    console.error('Erro ao compartilhar:', err);
+    const toast = await this.toastCtrl.create({
+      message: 'Não foi possível compartilhar.',
+      duration: 2000,
+      color: 'danger'
+    });
+    toast.present();
   }
+}
+
 }

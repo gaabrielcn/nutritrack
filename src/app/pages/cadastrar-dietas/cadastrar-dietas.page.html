@@ -5,30 +5,35 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/dietas"></ion-back-button>
     </ion-buttons>
-    <ion-title>Nutritrack - Cadastrar Dieta</ion-title>
+    <ion-title>
+      Nutritrack — {{ dietId ? 'Editar' : 'Cadastrar' }} Dieta
+    </ion-title>
+
+    <!-- Botão de deletar (apenas em edição) -->
+    <ion-buttons slot="end" *ngIf="dietId">
+      <ion-button color="danger" fill="clear" (click)="confirmarDelete()">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="pagina-cadastro-dieta">
-  <!-- Nome da Dieta, Calorias Estimadas e Total de Kcal -->
   <div class="campo-dieta">
     <ion-item>
       <ion-label position="floating">Nome da Dieta</ion-label>
       <ion-input [(ngModel)]="nomeDieta" type="text"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label position="floating">Calorias Estimadas</ion-label>
       <ion-input [(ngModel)]="estimativaCal" type="number"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label position="floating">Total de Kcal (real)</ion-label>
       <ion-input [value]="totalKcalDieta" readonly></ion-input>
     </ion-item>
   </div>
 
-  <!-- Refeições conforme antes -->
   <ng-container *ngFor="let refeicao of refeicoes; let i = index">
     <ion-card class="card-refeicao">
       <ion-button
@@ -70,14 +75,9 @@
           </ion-item>
         </ion-list>
 
-        <ion-item
-          class="campo-quantidade"
-          *ngIf="refeicao.selecionado">
-          <ion-label position="floating">Quantidade (gramas)</ion-label>
-          <ion-input
-            type="number"
-            [(ngModel)]="refeicao.qtd">
-          </ion-input>
+        <ion-item class="campo-quantidade" *ngIf="refeicao.selecionado">
+          <ion-label position="floating">Quantidade (g)</ion-label>
+          <ion-input type="number" [(ngModel)]="refeicao.qtd"></ion-input>
         </ion-item>
 
         <ion-button
@@ -105,7 +105,6 @@
     </ion-card>
   </ng-container>
 
-  <!-- FABs para adicionar refeição e salvar dieta -->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button color="secondary" (click)="adicionarRefeicao()">
       <ion-icon name="add"></ion-icon>

@@ -1,75 +1,72 @@
 // src/app/services/diet.service.ts
-
-import { Injectable } from '@angular/core';
-import { getFirestore, collection, addDoc, query, where, orderBy, getDocs, Firestore, Timestamp } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  deleteDoc,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  Firestore,
+  Timestamp
+} from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-
+import { Injectable } from '@angular/core';
 import { Diet } from '../models/diet.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class DietService {
   private db: Firestore;
 
   constructor() {
-    // Usa o Firestore modular (já inicializado no AppModule)
     this.db = getFirestore();
   }
 
-  /**
-   * Cria uma nova dieta no Firestore.
-   */
   async addDiet(diet: Omit<Diet, 'id' | 'dataCriacao' | 'userId'>): Promise<string> {
     const auth = getAuth();
     const user = auth.currentUser;
     if (!user) throw new Error('Usuário não autenticado.');
 
-    // Monta o objeto com os campos obrigatórios
     const toSave = {
       nomeDieta: diet.nomeDieta,
+      estimativaCal: diet.estimativaCal,
       totalKcal: diet.totalKcal,
       dataCriacao: Timestamp.fromDate(new Date()),
       userId: user.uid,
       refeicoes: diet.refeicoes
     };
 
-    const docRef = await addDoc(
-      collection(this.db, 'dietas'),
-      toSave
-    );
+    const docRef = await addDoc(collection(this.db, 'dietas'), toSave);
     return docRef.id;
   }
 
-  /**
-   * Retorna todas as dietas do usuário, ordenadas por data (mais recente primeiro).
-   */
   async getUserDiets(): Promise<Diet[]> {
     const auth = getAuth();
     const user = auth.currentUser;
     if (!user) return [];
 
-    // Prepara consulta: WHERE userId == uid ORDER BY dataCriacao desc
     const q = query(
       collection(this.db, 'dietas'),
       where('userId', '==', user.uid),
       orderBy('dataCriacao', 'desc')
     );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...(d.data() as any) })) as Diet[];
+  }
 
-    const querySnapshot = await getDocs(q);
-    const diets: Diet[] = [];
-    querySnapshot.forEach(docSnap => {
-      const data = docSnap.data() as Omit<Diet, 'id'>;
-      diets.push({
-        id: docSnap.id,
-        nomeDieta: data.nomeDieta,
-        totalKcal: data.totalKcal,
-        dataCriacao: data.dataCriacao,
-        userId: data.userId,
-        refeicoes: data.refeicoes
-      });
-    });
+  /** Novo: busca uma dieta pelo ID */
+  async getDietById(id: string): Promise<Diet> {
+    const docRef = doc(this.db, 'dietas', id);
+    const snap = await getDoc(docRef);
+    if (!snap.exists()) throw new Error('Dieta não encontrada.');
+    return { id: snap.id, ...(snap.data() as any) } as Diet;
+  }
 
-    return diets;
+  /** Novo: deleta dieta pelo ID */
+  async deleteDiet(id: string): Promise<void> {
+    await deleteDoc(doc(this.db, 'dietas', id));
   }
 }
