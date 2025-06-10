@@ -15,29 +15,53 @@
         <ion-label position="floating">Primeiro nome</ion-label>
         <ion-input type="text" formControlName="firstName"></ion-input>
       </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('firstName')?.errors?.['required'] && registerForm.get('firstName')?.touched">
+        Por favor, informe seu primeiro nome
+      </ion-note>
 
       <ion-item lines="inset" class="input-item">
         <ion-label position="floating">Sobrenome</ion-label>
         <ion-input type="text" formControlName="lastName"></ion-input>
       </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('lastName')?.errors?.['required'] && registerForm.get('lastName')?.touched">
+        Por favor, informe seu sobrenome
+      </ion-note>
 
       <ion-item lines="inset" class="input-item">
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched">
+        Por favor, informe seu email
+      </ion-note>
+      <ion-note color="danger" *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched">
+        Por favor, informe um email válido
+      </ion-note>
 
       <ion-item lines="inset" class="input-item">
         <ion-label position="floating">Telefone</ion-label>
-        <ion-input type="tel" formControlName="phone"></ion-input>
+        <ion-input type="tel" formControlName="phone" (ionInput)="formatPhone($event)"></ion-input>
       </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('phone')?.errors?.['required'] && registerForm.get('phone')?.touched">
+        Por favor, informe seu telefone
+      </ion-note>
+      <ion-note color="danger" *ngIf="registerForm.get('phone')?.errors?.['pattern'] && registerForm.get('phone')?.touched">
+        O telefone deve estar no formato (xx) xxxxx-xxxx
+      </ion-note>
 
       <ion-item lines="inset" class="input-item">
         <ion-label position="floating">Senha</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched">
+        Por favor, informe sua senha
+      </ion-note>
+      <ion-note color="danger" *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched">
+        A senha deve ter no mínimo 6 caracteres
+      </ion-note>
 
       <ion-button expand="block" type="submit" class="save-btn" [disabled]="!registerForm.valid">
-        SAVE
+        SALVAR
       </ion-button>
 
     </form>
